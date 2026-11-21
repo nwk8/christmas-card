@@ -1,0 +1,27 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "An interactive Christmas greeting card",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5000 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5000 --strictPort"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwk8/christmas-card.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nwk8/christmas-card/issues"
+  },
+  "homepage": "https://github.com/nwk8/christmas-card#readme",
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "vite": "^8.3.8"
+  }
+}
