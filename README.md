@@ -1,9 +1,10 @@
 # A Little Christmas Story
 
-An interactive Christmas card made with React and Vite. Select the lollipop
-marked **Open me** to open the book at its first page. Use the side arrows or
-left and right arrow keys to turn through the book; page one has the greeting
-and the remaining pages are blank.
+An interactive Christmas card made with React and Vite. The opening screen
+shows only the **Open me** lollipop. Select it to reveal the book cover, then
+select the cover to open page one. On phones the reader uses a single-page
+layout; wider screens show a two-page spread. Use the side arrows or left and
+right arrow keys to turn through the book; the later pages are blank.
 
 ## Run it
 
@@ -21,8 +22,9 @@ To create a production build, run `npm run build`.
   attaches to.
 - `public/favicon.svg` is the small evergreen icon shown in the browser tab.
 - `src/main.jsx` is the React entry point; it mounts the `App` component.
-- `src/App.jsx` builds the cover and book reader, draws the small SVG
-  illustrations, and handles opening the card and turning pages.
+- `src/App.jsx` builds the lollipop opening, interactive cover, and book reader,
+  draws the small SVG illustrations, and handles opening the card and turning
+  pages.
 - `src/index.css` defines the Christmas colors, cursive greeting, responsive
   styling, snow and page-arrival animations, and reduced-motion behavior.
 - `vite.config.mjs` configures the Vite preview host for Replit.

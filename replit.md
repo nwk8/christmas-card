@@ -12,8 +12,8 @@ workflow uses this same command for the web preview.
 - `index.html` provides the browser document, metadata, and React mount point.
 - `public/favicon.svg` is the browser-tab icon.
 - `src/main.jsx` starts React and renders the app.
-- `src/App.jsx` contains the cover, lollipop button, book pages, and page-turn
-  interactions.
+- `src/App.jsx` contains the lollipop-only opening, interactive cover, book
+  pages, and page-turn interactions.
 - `src/index.css` contains the colors, typography, responsive layout, and
   animations.
 - `vite.config.mjs` configures Vite to serve this project through Replit's

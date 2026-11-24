@@ -43,10 +43,30 @@ function WinterTree() {
 function LollipopButton({ onClick }) {
   return (
     <button className="lollipop-button" type="button" onClick={onClick} aria-label="Open me">
-      <span className="candy-stick" aria-hidden="true" />
-      <span className="candy-head" aria-hidden="true"><span className="candy-label">Open<br />me</span></span>
-      <span className="lollipop-caption" aria-hidden="true">A little something</span>
+      <svg className="lollipop-icon" viewBox="0 0 180 240" aria-hidden="true">
+        <defs>
+          <pattern id="lollipop-stripes" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+            <rect width="18" height="18" fill="#f8ead0" />
+            <rect width="9" height="18" fill="var(--candy-red)" />
+          </pattern>
+        </defs>
+        <path d="M83 133h14l8 85c1 10-5 16-15 16s-16-6-15-16l8-85Z" fill="#e4ce9d" stroke="#fff0cc" strokeWidth="2" />
+        <circle cx="90" cy="80" r="66" fill="url(#lollipop-stripes)" stroke="#f9e9c8" strokeWidth="5" />
+        <circle cx="90" cy="80" r="51" fill="#f2e5ca" stroke="#fff0cc" strokeWidth="2" strokeDasharray="2 4" />
+        <text className="candy-label" x="90" y="73" textAnchor="middle">
+          <tspan x="90" dy="0">Open</tspan>
+          <tspan x="90" dy="26">me</tspan>
+        </text>
+      </svg>
     </button>
+  );
+}
+
+function Opening({ onOpen }) {
+  return (
+    <main className="opening-scene" aria-label="Christmas card opening">
+      <LollipopButton onClick={onOpen} />
+    </main>
   );
 }
 
@@ -69,15 +89,14 @@ function Cover({ onOpen }) {
         <p>For a quiet moment, a warm cup, and someone dear.</p>
         <span className="cover-note">Made with love, just for you</span>
       </section>
-      <div className="cover-book" aria-hidden="true">
+      <button className="cover-book" type="button" onClick={onOpen} aria-label="Open the Christmas book">
         <div className="cover-art">
           <span className="cover-small">A keepsake for you</span>
           <h2>Christmas<br />in the<br />pines</h2>
           <WinterTree />
-          <span className="cover-year">winter, with love</span>
+          <span className="cover-year">Tap to open</span>
         </div>
-      </div>
-      <LollipopButton onClick={onOpen} />
+      </button>
     </main>
   );
 }
@@ -98,10 +117,7 @@ function Reader({ page, maxPage, onPrevious, onNext }) {
           <section className="book-page book-page--right" aria-label={page === 1 ? 'Greeting page' : 'Blank page'}>
             {page === 1 && (
               <article className="greeting">
-                <span className="greeting-kicker">With all my love</span>
-                <h2>Merry Christmas,<br />dear friend.</h2>
-                <p>May your days be warm, your nights be bright, and your heart be full.</p>
-                <span className="greeting-signoff">Always thinking of you</span>
+                <h2 className="greeting-message">Merry Christmas, my love, I hope this little book brings you joy.</h2>
               </article>
             )}
           </section>
@@ -117,12 +133,14 @@ function Reader({ page, maxPage, onPrevious, onNext }) {
 }
 
 function App() {
-  const [page, setPage] = useState(0);
+  const [view, setView] = useState('opening');
+  const [page, setPage] = useState(1);
   const maxPage = 6;
 
   useEffect(() => {
+    if (view !== 'reader') return undefined;
+
     const handleKeyDown = (event) => {
-      if (page === 0) return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
       if (event.key === 'ArrowRight') {
         event.preventDefault();
@@ -130,22 +148,40 @@ function App() {
       }
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        setPage((current) => Math.max(0, current - 1));
+        if (page === 1) {
+          setView('cover');
+        } else {
+          setPage((current) => Math.max(1, current - 1));
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [page]);
+  }, [page, view]);
 
   return (
-    <div className="app-shell">
-      <span className="winter-moon" aria-hidden="true" />
-      <FirSprig className="evergreen-branch--left" />
-      <FirSprig className="evergreen-branch--right" />
-      <div className="scene-caption" aria-hidden="true">December, by candlelight</div>
-      {page === 0
-        ? <Cover onOpen={() => setPage(1)} />
-        : <Reader page={page} maxPage={maxPage} onPrevious={() => setPage((current) => Math.max(0, current - 1))} onNext={() => setPage((current) => Math.min(maxPage, current + 1))} />}
+    <div className={`app-shell${view === 'opening' ? ' app-shell--opening' : ''}`}>
+      {view !== 'opening' && (
+        <>
+          <span className="winter-moon" aria-hidden="true" />
+          <FirSprig className="evergreen-branch--left" />
+          <FirSprig className="evergreen-branch--right" />
+          <div className="scene-caption" aria-hidden="true">December, by candlelight</div>
+        </>
+      )}
+      {view === 'opening' && <Opening onOpen={() => setView('cover')} />}
+      {view === 'cover' && <Cover onOpen={() => setView('reader')} />}
+      {view === 'reader' && (
+        <Reader
+          page={page}
+          maxPage={maxPage}
+          onPrevious={() => {
+            if (page === 1) setView('cover');
+            else setPage((current) => Math.max(1, current - 1));
+          }}
+          onNext={() => setPage((current) => Math.min(maxPage, current + 1))}
+        />
+      )}
     </div>
   );
 }

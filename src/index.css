@@ -14,6 +14,8 @@
   --ink: #29473d;
   --cranberry: #a83f46;
   --cranberry-deep: #81353a;
+  --candy-red: #a94347;
+  --opening-background: #943b42;
   --brass: #d9b875;
   --soft-cream: #f8f0e3;
   --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -59,6 +61,12 @@ button:focus-visible {
     linear-gradient(145deg, #214a41 0%, #173c37 47%, #102e2b 100%);
 }
 
+.app-shell--opening {
+  background:
+    radial-gradient(ellipse at 50% 46%, rgba(178, 66, 74, .12), transparent 48%),
+    linear-gradient(145deg, #9b3e44 0%, var(--opening-background) 54%, #8b363e 100%);
+}
+
 .app-shell::before,
 .app-shell::after {
   position: fixed;
@@ -80,6 +88,8 @@ button:focus-visible {
   background-size: 230px 220px, 330px 300px, 270px 280px, 360px 310px, 300px 270px, 290px 250px;
   animation: snow-drift 22s linear infinite;
 }
+
+.app-shell--opening::before { opacity: .18; }
 
 .app-shell::after {
   z-index: 10;
@@ -128,6 +138,15 @@ button:focus-visible {
   font-size: 14px;
   font-style: italic;
   letter-spacing: .08em;
+}
+
+.opening-scene {
+  position: relative;
+  display: grid;
+  width: min(100%, 1020px);
+  min-height: calc(100dvh - 96px);
+  place-items: center;
+  animation: scene-arrive .85s cubic-bezier(.2,.75,.25,1) both;
 }
 
 .cover-scene {
@@ -209,6 +228,10 @@ button:focus-visible {
   padding: 20px;
   border: 1px solid rgba(221, 188, 116, .6);
   border-radius: 4px 12px 12px 4px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
   background:
     linear-gradient(90deg, rgba(10, 39, 35, .5) 0 6%, transparent 9% 92%, rgba(242, 214, 159, .08) 94%),
     radial-gradient(ellipse at 50% 38%, #2e5e50, #1c463d 63%, #143a34);
@@ -236,7 +259,8 @@ button:focus-visible {
   transform: translateY(-50%);
 }
 
-.cover-scene:hover .cover-book { transform: rotate(-1deg) translateY(-5px); }
+.cover-book:hover,
+.cover-book:focus-visible { transform: rotate(-1deg) translateY(-5px); }
 
 .cover-art {
   position: relative;
@@ -258,7 +282,7 @@ button:focus-visible {
   text-transform: uppercase;
 }
 
-.cover-art h2 {
+.cover-art .cover-title {
   margin: 18px 0 14px;
   color: #f4e7cb;
   font-family: var(--font-display);
@@ -288,9 +312,9 @@ button:focus-visible {
 .lollipop-button {
   position: relative;
   z-index: 2;
-  width: 122px;
-  height: 178px;
-  flex: 0 0 122px;
+  width: 150px;
+  height: 200px;
+  flex: 0 0 150px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -301,64 +325,23 @@ button:focus-visible {
 
 .lollipop-button:hover { transform: rotate(-2deg) translateY(-7px) scale(1.04); }
 .lollipop-button:active { transform: rotate(1deg) translateY(1px) scale(.96); }
+.opening-scene .lollipop-button { transform: rotate(7deg) scale(1.12); }
+.opening-scene .lollipop-button:hover { transform: rotate(-2deg) translateY(-7px) scale(1.16); }
+.opening-scene .lollipop-button:active { transform: rotate(1deg) translateY(1px) scale(1.06); }
 
-.candy-stick {
-  position: absolute;
-  top: 89px;
-  left: 56px;
-  width: 10px;
-  height: 82px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #dfc895, #fff0cc 48%, #d4bc8a);
-  box-shadow: 2px 5px 8px rgba(3, 21, 19, .28);
-}
-
-.candy-head {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  width: 122px;
-  height: 122px;
-  place-items: center;
-  border: 4px solid #f9e9c8;
-  border-radius: 50%;
-  background:
-    repeating-conic-gradient(from 7deg, #a94347 0deg 21deg, #f8ead0 21deg 42deg);
-  box-shadow: 0 7px 22px rgba(4, 20, 18, .37), inset 0 0 0 2px rgba(116, 52, 44, .18);
-}
-
-.candy-head::before {
-  position: absolute;
-  inset: 15px;
-  border: 1px dashed rgba(121, 67, 51, .42);
-  border-radius: 50%;
-  background: #f2e5ca;
-  box-shadow: 0 2px 8px rgba(49, 30, 21, .22);
-  content: '';
+.lollipop-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 10px 15px rgba(47, 17, 22, .24));
 }
 
 .candy-label {
-  position: relative;
-  z-index: 1;
-  color: #743a36;
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1;
-  transform: rotate(-7deg);
-}
-
-.lollipop-caption {
-  position: absolute;
-  top: 136px;
-  left: 50%;
-  width: max-content;
-  color: rgba(246, 237, 221, .76);
-  font-size: 9px;
-  letter-spacing: .17em;
-  text-transform: uppercase;
-  transform: translateX(-50%);
+  fill: #743a36;
+  font-family: var(--font-script);
+  font-size: 27px;
+  font-weight: 400;
 }
 
 .reader {
@@ -451,7 +434,7 @@ button:focus-visible {
 
 .greeting {
   position: relative;
-  width: min(82%, 385px);
+  width: min(86%, 460px);
   padding: 28px 18px 34px;
   color: #365749;
   text-align: center;
@@ -472,39 +455,14 @@ button:focus-visible {
 .greeting::before { top: 0; }
 .greeting::after { bottom: 0; }
 
-.greeting-kicker {
-  display: block;
-  margin-bottom: 20px;
-  color: #a3814c;
-  font-size: 8px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-}
-
-.greeting h2 {
-  margin: 0 0 22px;
+.greeting-message {
+  margin: 0;
   color: #9d4548;
   font-family: var(--font-script);
-  font-size: clamp(42px, 5vw, 65px);
+  font-size: clamp(42px, 4.8vw, 68px);
   font-weight: 400;
-  line-height: .98;
-}
-
-.greeting p {
-  margin: 0 auto;
-  color: #496255;
-  font-family: var(--font-display);
-  font-size: clamp(17px, 1.8vw, 22px);
-  line-height: 1.48;
-}
-
-.greeting-signoff {
-  display: block;
-  margin-top: 22px;
-  color: #9a7748;
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-style: italic;
+  line-height: 1.12;
+  text-wrap: pretty;
 }
 
 .turn-control {
@@ -583,6 +541,7 @@ button:focus-visible {
 
 @media (max-width: 760px) {
   .app-shell { min-height: 100dvh; padding: 74px 20px 46px; }
+  .opening-scene { min-height: calc(100dvh - 120px); }
   .winter-moon { top: 5%; left: 8%; width: 48px; }
   .scene-caption { top: 26px; right: 22px; font-size: 12px; }
   .evergreen-branch--left { left: -90px; top: -30px; }
@@ -596,37 +555,42 @@ button:focus-visible {
   .cover-book { width: clamp(230px, 55vw, 330px); }
   .cover-art { padding: 24px; }
   .tree-scene { min-height: 110px; }
-  .lollipop-button { width: 98px; height: 141px; flex-basis: 98px; }
-  .candy-head { width: 98px; height: 98px; }
-  .candy-head::before { inset: 12px; }
-  .candy-stick { top: 72px; left: 46px; width: 8px; height: 68px; }
-  .candy-label { font-size: 16px; }
-  .lollipop-caption { top: 110px; font-size: 8px; }
+  .lollipop-button { width: 132px; height: 176px; flex-basis: 132px; }
   .reader { min-height: auto; }
-  .reader-topline { margin: 0 14px 17px; font-size: 8px; }
-  .book-frame { width: calc(100% - 58px); }
-  .book-spread { min-height: clamp(420px, 62vh, 540px); }
-  .book-spread::before { width: 13px; }
+  .reader-topline { margin: 0 4px 17px; font-size: 8px; letter-spacing: .12em; }
+  .book-frame { width: calc(100% - 80px); }
+  .book-spread {
+    min-height: clamp(400px, 58svh, 520px);
+    grid-template-columns: 1fr;
+  }
+  .book-spread::before { display: none; }
+  .book-page--left { display: none; }
+  .book-page--right { grid-column: 1; box-shadow: inset 8px 0 18px -18px rgba(54, 38, 22, .7); }
   .turn-control { width: 38px; height: 62px; }
-  .turn-control--prev { left: -48px; }
-  .turn-control--next { right: -48px; }
-  .greeting { width: 88%; padding: 22px 7px; }
-  .greeting h2 { font-size: clamp(34px, 8vw, 47px); }
-  .greeting-kicker { font-size: 7px; letter-spacing: .16em; }
-  .greeting p { font-size: clamp(15px, 4vw, 18px); }
-  .greeting-signoff { font-size: 13px; }
+  .turn-control--prev { left: 0; }
+  .turn-control--next { right: 0; }
+  .greeting { width: 88%; padding: 22px clamp(14px, 4vw, 30px); }
+  .greeting-message { font-size: clamp(38px, 7vw, 52px); line-height: 1.15; }
   .reader-footer { margin-top: 19px; font-size: 12px; }
 }
 
 @media (max-width: 420px) {
   .app-shell { padding-right: 16px; padding-left: 16px; }
+  .lollipop-button { width: 122px; height: 163px; flex-basis: 122px; }
   .cover-book { width: 228px; }
-  .book-frame { width: calc(100% - 46px); }
-  .turn-control { width: 32px; }
-  .turn-control--prev { left: -39px; }
-  .turn-control--next { right: -39px; }
-  .book-spread { min-height: 400px; }
-  .greeting h2 { font-size: 34px; }
+  .book-frame { width: calc(100% - 72px); }
+  .turn-control { width: 34px; }
+  .book-spread { min-height: clamp(380px, 58svh, 460px); }
+  .greeting { width: 94%; padding: 20px 12px; }
+  .greeting-message { font-size: clamp(30px, 9vw, 38px); }
+}
+
+@media (max-width: 760px) and (max-height: 640px) {
+  .app-shell { padding-top: 58px; padding-bottom: 26px; }
+  .opening-scene { min-height: calc(100dvh - 84px); }
+  .book-spread { min-height: clamp(320px, 62svh, 390px); }
+  .reader-topline { margin-bottom: 12px; }
+  .reader-footer { margin-top: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
