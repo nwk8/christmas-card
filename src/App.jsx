@@ -1,186 +1,512 @@
-import { useEffect, useState } from 'react';
-import './index.css';
+import { useState } from "react";
+import "./index.css";
 
-function FirSprig({ className = '' }) {
+/* =========================================
+   EVERGREEN DECORATIONS
+========================================= */
+
+function FirSprig({ className = "" }) {
   return (
-    <svg className={`evergreen-branch ${className}`} viewBox="0 0 420 310" fill="none" aria-hidden="true">
-      <path d="M15 28C105 73 188 136 410 290" stroke="#a8b99a" strokeWidth="7" strokeLinecap="round" />
-      <g stroke="#91a78c" strokeWidth="5" strokeLinecap="round">
-        <path d="M66 58 28 28m45 34 3-47M109 88 62 74m54 22 21-43M155 117l-54-1m63 10 33-39M203 151l-59-14m69 23 41-38M252 186l-63-23m72 31 46-35M300 219l-61-30m71 38 49-28M347 253l-58-34m67 42 49-22" />
-        <path d="m78 68 20-31m37 65-2-42m43 72 12-45m44 75 19-43m46 76 24-39m44 71 28-35" />
-      </g>
-      <g fill="#c3a36b">
-        <circle cx="116" cy="87" r="6" /><circle cx="225" cy="163" r="7" /><circle cx="321" cy="227" r="6" />
-      </g>
-      <g fill="#e4d8ba">
-        <circle cx="50" cy="47" r="3" /><circle cx="172" cy="124" r="3" /><circle cx="277" cy="199" r="3" />
-      </g>
+    <svg
+      className={`evergreen-branch ${className}`}
+      viewBox="0 0 420 310"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M15 28C105 73 188 136 410 290"
+        stroke="#8b9b70"
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      {Array.from({ length: 13 }, (_, i) => {
+        const x = 28 + i * 29;
+        const y = 36 + i * 19;
+
+        return (
+          <g key={i} strokeLinecap="round">
+            <path
+              d={`M${x} ${y} l-${20 + i} -28`}
+              stroke="#496c4e"
+              strokeWidth="5"
+            />
+            <path
+              d={`M${x + 7} ${y + 5} l${24 + i} -23`}
+              stroke="#31583f"
+              strokeWidth="5"
+            />
+            <path
+              d={`M${x + 11} ${y + 9} l-${13 + i} 27`}
+              stroke="#71865b"
+              strokeWidth="4"
+            />
+            <path
+              d={`M${x + 16} ${y + 13} l${25 + i} 13`}
+              stroke="#496c4e"
+              strokeWidth="4"
+            />
+          </g>
+        );
+      })}
+
+      <circle cx="106" cy="89" r="6" fill="#a84347" />
+      <circle cx="248" cy="193" r="6" fill="#b94d4d" />
+      <circle cx="327" cy="244" r="5" fill="#d9b875" />
     </svg>
   );
 }
+
+/* =========================================
+   CHRISTMAS TREE ILLUSTRATION
+========================================= */
 
 function WinterTree() {
   return (
-    <svg className="tree-scene" viewBox="0 0 220 190" fill="none" aria-hidden="true">
-      <path d="M108 17 63 74h25L52 113h34l-48 45h143l-48-45h34l-36-39h25L108 17Z" fill="#17372f" stroke="#d9c38d" strokeWidth="1.2" />
-      <path d="m108 21-30 47h16L63 105h29l-37 41h107l-37-41h28L127 68h18l-37-47Z" fill="#31594a" />
-      <path d="m108 22-31 47 16-2m42 0 12 1m-84 37 29-1m46 1 27 1m-101 41 42-2m32 0 38 2" stroke="#ece0c3" strokeWidth="3" strokeLinecap="round" />
-      <path d="M104 156h9v20h-9z" fill="#a17a4f" />
-      <path d="M109 49v6m-3-3h6" stroke="#e8d394" strokeWidth="1.5" strokeLinecap="round" />
-      <g fill="#c64e50">
-        <circle cx="82" cy="91" r="3.3" /><circle cx="131" cy="83" r="3.3" /><circle cx="100" cy="120" r="3.3" /><circle cx="145" cy="128" r="3.3" />
+    <svg
+      className="tree-scene"
+      viewBox="0 0 260 300"
+      fill="none"
+      role="img"
+      aria-label="Illustration of a snow-covered Christmas tree"
+    >
+      <defs>
+        <linearGradient id="treeGreen" x1="50" y1="20" x2="210" y2="270">
+          <stop stopColor="#66866a" />
+          <stop offset="1" stopColor="#183b32" />
+        </linearGradient>
+        <linearGradient id="snowWhite" x1="80" y1="20" x2="190" y2="230">
+          <stop stopColor="#fffdf3" />
+          <stop offset="1" stopColor="#d8e1d5" />
+        </linearGradient>
+      </defs>
+
+      <path
+        d="M130 31L139 48L157 43L151 61L171 68L153 81L176 91L151 105L183 119L151 134L195 153L150 170L210 195L151 214L222 235H38L109 214L50 195L110 170L66 153L109 134L77 119L108 105L84 91L108 81L89 68L111 61L105 43L124 48Z"
+        fill="url(#treeGreen)"
+        stroke="#c7d2bc"
+        strokeWidth="1.5"
+      />
+
+      <path
+        d="M130 31L139 48L157 43L151 61L171 68L153 81L176 91L151 105L183 119L151 134L195 153L150 170L210 195L151 214L222 235H38L109 214L50 195L110 170L66 153L109 134L77 119L108 105L84 91L108 81L89 68L111 61L105 43L124 48Z"
+        stroke="url(#snowWhite)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="2 9"
+      />
+
+      <path d="M119 234H141V264H119Z" fill="#8a5b3e" />
+
+      <path
+        d="M129 8L134 19L146 20L137 28L140 40L129 33L118 40L121 28L112 20L124 19Z"
+        fill="#e6c987"
+        stroke="#f5e8c9"
+        strokeWidth="1.5"
+      />
+
+      <g fill="#d8b875">
+        <circle cx="129" cy="78" r="4" />
+        <circle cx="104" cy="119" r="4" />
+        <circle cx="155" cy="145" r="4" />
+        <circle cx="112" cy="179" r="4" />
+        <circle cx="174" cy="200" r="4" />
       </g>
-      <g fill="#efd99d">
-        <circle cx="115" cy="69" r="2" /><circle cx="77" cy="125" r="2" /><circle cx="126" cy="105" r="2" /><circle cx="96" cy="145" r="2" />
+
+      <g fill="#a84347">
+        <circle cx="145" cy="100" r="5" />
+        <circle cx="128" cy="158" r="5" />
+        <circle cx="92" cy="195" r="5" />
       </g>
-      <path d="M45 178c34-6 91-6 127 0" stroke="#d8c391" strokeWidth="1" opacity=".7" />
-      <circle cx="39" cy="56" r="1.6" fill="#efe4ca" /><circle cx="171" cy="53" r="1.6" fill="#efe4ca" />
-      <circle cx="56" cy="31" r="1" fill="#efe4ca" /><circle cx="156" cy="25" r="1.4" fill="#efe4ca" />
+
+      <g fill="#fffaf0">
+        <circle cx="75" cy="87" r="2" />
+        <circle cx="188" cy="128" r="2" />
+        <circle cx="75" cy="177" r="2" />
+        <circle cx="190" cy="214" r="2" />
+      </g>
+
+      <path
+        d="M27 266C78 253 181 253 233 266"
+        stroke="#e7e0cb"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="M48 276C102 267 166 267 213 276"
+        stroke="#b8c8b8"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
 
-function LollipopButton({ onClick }) {
+/* =========================================
+   OPENING SUGAR CUBE
+========================================= */
+
+function SugarCube({ onClick }) {
   return (
-    <button className="lollipop-button" type="button" onClick={onClick} aria-label="Open me">
-      <svg className="lollipop-icon" viewBox="0 0 180 240" aria-hidden="true">
-        <defs>
-          <pattern id="lollipop-stripes" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
-            <rect width="18" height="18" fill="#f8ead0" />
-            <rect width="9" height="18" fill="var(--candy-red)" />
-          </pattern>
-        </defs>
-        <path d="M83 133h14l8 85c1 10-5 16-15 16s-16-6-15-16l8-85Z" fill="#e4ce9d" stroke="#fff0cc" strokeWidth="2" />
-        <circle cx="90" cy="80" r="66" fill="url(#lollipop-stripes)" stroke="#f9e9c8" strokeWidth="5" />
-        <circle cx="90" cy="80" r="51" fill="#f2e5ca" stroke="#fff0cc" strokeWidth="2" strokeDasharray="2 4" />
-        <text className="candy-label" x="90" y="73" textAnchor="middle">
-          <tspan x="90" dy="0">Open</tspan>
-          <tspan x="90" dy="26">me</tspan>
-        </text>
-      </svg>
+    <button
+      className="sugar-cube-button"
+      onClick={onClick}
+      aria-label="Open me"
+      type="button"
+    >
+      <span className="sugar-cube">
+        <span className="sugar-cube-top" />
+        <span className="sugar-cube-front">
+          <span>OPEN ME</span>
+        </span>
+        <span className="sugar-cube-side" />
+      </span>
     </button>
   );
 }
 
-function Opening({ onOpen }) {
+/* =========================================
+   PAGE 1 - CHRISTMAS LETTER
+========================================= */
+
+function ChristmasLetter() {
   return (
-    <main className="opening-scene" aria-label="Christmas card opening">
-      <LollipopButton onClick={onOpen} />
-    </main>
+    <section className="greeting">
+      <div className="greeting-content">
+        <div className="greeting-text">
+          <h2 className="letter-heading">Merry Christmas, my love.</h2>
+
+          <p className="greeting-message">
+            I hope this Christmas brings you as much warmth and happiness as you
+            bring into my life. I'm so grateful for all the little moments we've
+            shared, and for the memories still waiting for us.
+          </p>
+
+          <p className="story-text">
+            Meeting you changed my life, I really didn't think I would find my
+            match. I wasn't even looking for it.Out of all the people in that
+            godforsaken city, I met you. I got to know you, care about you, and
+            experience what it's like to have someone who means everything to
+            me. I'm so grateful I met you, and I wouldn't want it any other way.
+          </p>
+        </div>
+
+        <figure className="greeting-image">
+          <img src="/images/front.heic" alt="My baby ❤️" />
+          <figcaption>My baby ❤️</figcaption>
+        </figure>
+      </div>
+    </section>
   );
 }
 
-function ArrowIcon({ direction }) {
+/* =========================================
+   PAGE 2 - OUR RELATIONSHIP TIMELINE
+========================================= */
+
+function TimelinePage() {
+  const milestones = [
+    {
+      date: "The beginning",
+      title: "June 26th / September 29th at 10:20pm",
+      description:
+        "when we first met / when you asked me to be my girlfriend, i was shocked and i remember thinking: holy shit i cant believe this is happening right now.",
+      image: "/images/aMelMelMel.jpg",
+    },
+    {
+      date: "October 9,10,11th",
+      title: "Our first date",
+      description:
+        "I wasn't sure whether I 'loved' you at first, but this date proved otherwise, I loved you so so much.",
+      image: "/images/timeline-1.HEIC",
+    },
+    {
+      date: "Our daily facetime calls",
+      title: "A special memory",
+      description:
+        "The best part of my day, it makes long distance seem like nothing. You make my life better everyday",
+      image: "/images/timeline-4.heic",
+    },
+  ];
+
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      {direction === 'left'
-        ? <path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        : <path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />}
-    </svg>
+    <section className="timeline-page">
+      <div className="timeline-heading">
+        <h2>Our story so far!</h2>
+      </div>
+
+      <div className="timeline">
+        {milestones.map((milestone, index) => (
+          <article className="timeline-item" key={index}>
+            <span className="timeline-marker" />
+
+            <div className="timeline-entry">
+              <span className="timeline-date">{milestone.date}</span>
+              <h3>{milestone.title}</h3>
+              <p>{milestone.description}</p>
+
+              {milestone.image && (
+                <figure className="timeline-photo">
+                  <img
+                    src={milestone.image}
+                    alt={milestone.caption || milestone.title}
+                  />
+                  {milestone.caption && (
+                    <figcaption>{milestone.caption}</figcaption>
+                  )}
+                </figure>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
-function Cover({ onOpen }) {
+/* =========================================
+   PAGE 4 - OUR RELATIONSHIP TIMELINE
+========================================= */
+function ReminderPage() {
   return (
-    <main className="cover-scene" aria-label="Christmas greeting card cover">
+    <section className="placeholder-page love-page reminder-page">
+      <span className="letter-eyebrow">
+        For the days you need some affirmations
+      </span>
+
+      <div className="love-reminders">
+        <p>You are so, so loved.</p>
+        <p>You never have to earn my affection.</p>
+        <p>I'm happy with you, even in the quiet moments.</p>
+        <p>You don't have to have everything figured out.</p>
+        <p>I'm grateful that I get to know you.</p>
+        <p>You never EVER have to face everything alone.</p>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================
+   PAGE 5 - VOICE RECORDING
+========================================= */
+
+function VoiceMessagePage() {
+  return (
+    <section className="placeholder-page voice-page">
+      <h2>One Last Thing...</h2>
+
+      <p>
+        I wanted to leave you something special to me. It took me weeks to get
+        it right, maybe you just want to hear my voice, but regardless i hope
+        this brings you some solace.
+      </p>
+
+      <div className="voice-player">
+        <div className="voice-player-icon">
+          <span>♫</span>
+        </div>
+
+        <p className="voice-player-title">A message from me to you</p>
+
+        <audio controls preload="metadata">
+          <source src="/voice-message.mp3" type="audio/mpeg" />
+          Your browser does not support audio playback.
+        </audio>
+      </div>
+
+      <span className="page-closing">All my love, always.</span>
+    </section>
+  );
+}
+
+/* =========================================
+   CHRISTMAS BOOK COVER
+========================================= */
+
+function Cover({ onClick }) {
+  return (
+    <main className="cover-scene">
       <section className="cover-copy">
-        <p className="eyebrow">A winter keepsake</p>
-        <h1>A little <em>Christmas</em> story</h1>
-        <p>For a quiet moment, a warm cup, and someone dear.</p>
-        <span className="cover-note">Made with love, just for you</span>
+        <p className="eyebrow">A little something for you</p>
+
+        <h1>
+          Merry<em>Christmas</em>
+        </h1>
+
+        <p>
+          For a quiet moment, a warm candle, and someone dear (preferably me).
+        </p>
+
+        <span className="cover-note">Made by yours truly, with love</span>
       </section>
-      <button className="cover-book" type="button" onClick={onOpen} aria-label="Open the Christmas book">
+
+      <button
+        className="cover-book"
+        onClick={onClick}
+        aria-label="Open the Christmas book"
+        type="button"
+      >
         <div className="cover-art">
-          <span className="cover-small">A keepsake for you</span>
-          <h2>Christmas<br />in the<br />pines</h2>
+          <span className="cover-small">A little book of memories</span>
+
+          <h2 className="cover-title">
+            Merry
+            <br />
+            Christmas
+          </h2>
+
           <WinterTree />
-          <span className="cover-year">Tap to open</span>
+
+          <span className="cover-year">Christmas 2026</span>
         </div>
       </button>
     </main>
   );
 }
 
-function Reader({ page, maxPage, onPrevious, onNext }) {
+/* =========================================
+   BOOK READER - SIX PAGES
+========================================= */
+
+function Reader({ spread, setSpread, onBack }) {
+  const pageCount = 3;
+  const leftPageNumber = spread * 2 + 1;
+  const rightPageNumber = leftPageNumber + 1;
+
+  const renderPage = (pageNumber) => {
+    switch (pageNumber) {
+      case 1:
+        return <ChristmasLetter />;
+      case 2:
+        return <TimelinePage />;
+      case 3:
+        return <PeaceAndFuturePage />;
+      case 4:
+        return <ReminderPage />;
+      case 5:
+        return <VoiceMessagePage />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <main className="reader" aria-label="Christmas card book">
-      <div className="reader-topline" aria-live="polite">
-        <span>A letter for a winter day</span>
-        <span>Page {String(page).padStart(2, '0')} <span aria-hidden="true">/</span> {String(maxPage).padStart(2, '0')}</span>
+    <main className="reader">
+      <div className="reader-topline">
+        <span>A little book of memories</span>
+        <span>
+          Pages {leftPageNumber}–{rightPageNumber} of 6
+        </span>
       </div>
-      <button className="turn-control turn-control--prev" type="button" onClick={onPrevious} aria-label={page === 1 ? 'Return to the cover' : 'Turn to the previous page'}>
-        <ArrowIcon direction="left" />
-      </button>
+
       <div className="book-frame">
+        <button
+          className="turn-control turn-control--prev"
+          onClick={() => setSpread((current) => Math.max(0, current - 1))}
+          disabled={spread === 0}
+          aria-label="Previous pages"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
         <div className="book-spread">
-          <section className="book-page book-page--left" aria-label="Left page" />
-          <section className="book-page book-page--right" aria-label={page === 1 ? 'Greeting page' : 'Blank page'}>
-            {page === 1 && (
-              <article className="greeting">
-                <h2 className="greeting-message">Merry Christmas, my love, I hope this little book brings you joy.</h2>
-              </article>
-            )}
-          </section>
+          <div className="book-page book-page--left">
+            {renderPage(leftPageNumber)}
+            <span className="page-number">{leftPageNumber}</span>
+          </div>
+
+          <div className="book-page book-page--right">
+            {renderPage(rightPageNumber)}
+            <span className="page-number">{rightPageNumber}</span>
+          </div>
         </div>
+
+        <button
+          className="turn-control turn-control--next"
+          onClick={() =>
+            setSpread((current) => Math.min(pageCount - 1, current + 1))
+          }
+          disabled={spread === pageCount - 1}
+          aria-label="Next pages"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M9 18L15 12L9 6"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
       </div>
-      <button className="turn-control turn-control--next" type="button" onClick={onNext} disabled={page >= maxPage} aria-label="Turn to the next page">
-        <ArrowIcon direction="right" />
+
+      <div className="reader-footer">
+        <span>Made with love, just for you</span>
+      </div>
+
+      <button className="back-to-cover" onClick={onBack} type="button">
+        Back to cover
       </button>
-      <div className="reader-footer" aria-hidden="true">Keep turning, if you like</div>
-      <span className="sr-only" aria-live="polite">Page {page} of {maxPage}{page > 1 ? ', blank page' : ', Christmas greeting'}</span>
     </main>
   );
 }
+
+/* =========================================
+   MAIN APP
+========================================= */
 
 function App() {
-  const [view, setView] = useState('opening');
-  const [page, setPage] = useState(1);
-  const maxPage = 6;
+  const [view, setView] = useState("opening");
+  const [spread, setSpread] = useState(0);
 
-  useEffect(() => {
-    if (view !== 'reader') return undefined;
+  const openReader = () => {
+    setSpread(0);
+    setView("reader");
+  };
 
-    const handleKeyDown = (event) => {
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        setPage((current) => Math.min(maxPage, current + 1));
-      }
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        if (page === 1) {
-          setView('cover');
-        } else {
-          setPage((current) => Math.max(1, current - 1));
-        }
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [page, view]);
+  const backToCover = () => {
+    setSpread(0);
+    setView("cover");
+  };
 
   return (
-    <div className={`app-shell${view === 'opening' ? ' app-shell--opening' : ''}`}>
-      {view !== 'opening' && (
-        <>
-          <span className="winter-moon" aria-hidden="true" />
-          <FirSprig className="evergreen-branch--left" />
-          <FirSprig className="evergreen-branch--right" />
-          <div className="scene-caption" aria-hidden="true">December, by candlelight</div>
-        </>
+    <div
+      className={`app-shell ${view === "opening" ? "app-shell--opening" : ""}`}
+    >
+      <div className="winter-moon" aria-hidden="true" />
+
+      <FirSprig className="evergreen-branch--left" />
+      <FirSprig className="evergreen-branch--right" />
+
+      <span className="scene-caption">December 15, 2026</span>
+
+      {view === "opening" && (
+        <main className="opening-scene">
+          <div className="opening-copy">
+            <span className="opening-eyebrow">A little something awaits</span>
+            <h1>A Christmas surprise</h1>
+          </div>
+
+          <SugarCube onClick={() => setView("cover")} />
+        </main>
       )}
-      {view === 'opening' && <Opening onOpen={() => setView('cover')} />}
-      {view === 'cover' && <Cover onOpen={() => setView('reader')} />}
-      {view === 'reader' && (
-        <Reader
-          page={page}
-          maxPage={maxPage}
-          onPrevious={() => {
-            if (page === 1) setView('cover');
-            else setPage((current) => Math.max(1, current - 1));
-          }}
-          onNext={() => setPage((current) => Math.min(maxPage, current + 1))}
-        />
+
+      {view === "cover" && <Cover onClick={openReader} />}
+
+      {view === "reader" && (
+        <Reader spread={spread} setSpread={setSpread} onBack={backToCover} />
       )}
     </div>
   );
