@@ -478,6 +478,7 @@ function Reader({ spread, setSpread, onBack }) {
 ========================================= */
 
 function App() {
+  console.log("CHRISTMAS APP IS RUNNING");
   const [view, setView] = useState("opening");
   const [spread, setSpread] = useState(0);
 
