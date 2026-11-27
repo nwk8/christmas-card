@@ -31,7 +31,15 @@ jobs:
         run: npm install -g npm@10.9.2
 
       - name: Install dependencies
-        run: npm ci --include=dev --no-audit --no-fund --cache /tmp/npm-cache
+        run: |
+          npm ci --include=dev --no-audit --no-fund --cache /tmp/npm-cache || {
+            status=$?
+            echo "===== NPM DEBUG LOG ====="
+            for f in /tmp/npm-cache/_logs/*debug-0.log; do
+              cat "$f"
+            done
+            exit "$status"
+          }
 
       - name: Build React app
         run: npm run build
