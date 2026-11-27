@@ -1,5 +1,14 @@
+
 import { useState } from "react";
 import "./index.css";
+
+/* =========================================
+   ASSET PATHS - GITHUB PAGES
+========================================= */
+
+const BASE = import.meta.env.BASE_URL;
+
+const asset = (path) => `${BASE}${path}`;
 
 /* =========================================
    EVERGREEN DECORATIONS
@@ -185,7 +194,7 @@ function ChristmasLetter() {
 
           <p className="story-text">
             Meeting you changed my life, I really didn't think I would find my
-            match. I wasn't even looking for it.Out of all the people in that
+            match. I wasn't even looking for it. Out of all the people in that
             godforsaken city, I met you. I got to know you, care about you, and
             experience what it's like to have someone who means everything to
             me. I'm so grateful I met you, and I wouldn't want it any other way.
@@ -193,7 +202,7 @@ function ChristmasLetter() {
         </div>
 
         <figure className="greeting-image">
-          <img src="/images/front.heic" alt="My baby ❤️" />
+          <img src={asset("images/front.heic")} alt="My baby ❤️" />
           <figcaption>My baby ❤️</figcaption>
         </figure>
       </div>
@@ -212,21 +221,21 @@ function TimelinePage() {
       title: "June 26th / September 29th at 10:20pm",
       description:
         "when we first met / when you asked me to be my girlfriend, i was shocked and i remember thinking: holy shit i cant believe this is happening right now.",
-      image: "/images/aMelMelMel.jpg",
+      image: asset("images/aMelMelMel.jpg"),
     },
     {
       date: "October 9,10,11th",
       title: "Our first date",
       description:
         "I wasn't sure whether I 'loved' you at first, but this date proved otherwise, I loved you so so much.",
-      image: "/images/timeline-1.HEIC",
+      image: asset("images/timeline-1.HEIC"),
     },
     {
       date: "Our daily facetime calls",
       title: "A special memory",
       description:
         "The best part of my day, it makes long distance seem like nothing. You make my life better everyday",
-      image: "/images/timeline-4.heic",
+      image: asset("images/timeline-4.heic"),
     },
   ];
 
@@ -250,7 +259,7 @@ function TimelinePage() {
                 <figure className="timeline-photo">
                   <img
                     src={milestone.image}
-                    alt={milestone.caption || milestone.title}
+                    alt={milestone.title}
                   />
                   {milestone.caption && (
                     <figcaption>{milestone.caption}</figcaption>
@@ -266,8 +275,9 @@ function TimelinePage() {
 }
 
 /* =========================================
-   PAGE 4 - OUR RELATIONSHIP TIMELINE
+   PAGE 3 - LOVE REMINDERS
 ========================================= */
+
 function ReminderPage() {
   return (
     <section className="placeholder-page love-page reminder-page">
@@ -288,7 +298,7 @@ function ReminderPage() {
 }
 
 /* =========================================
-   PAGE 5 - VOICE RECORDING
+   PAGE 4 - VOICE RECORDING
 ========================================= */
 
 function VoiceMessagePage() {
@@ -310,7 +320,7 @@ function VoiceMessagePage() {
         <p className="voice-player-title">A message from me to you</p>
 
         <audio controls preload="metadata">
-          <source src="/voice-message.mp3" type="audio/mpeg" />
+          <source src={asset("voice-message.mp3")} type="audio/mpeg" />
           Your browser does not support audio playback.
         </audio>
       </div>
@@ -366,11 +376,13 @@ function Cover({ onClick }) {
 }
 
 /* =========================================
-   BOOK READER - SIX PAGES
+   BOOK READER - FOUR PAGES / TWO SPREADS
 ========================================= */
 
 function Reader({ spread, setSpread, onBack }) {
-  const pageCount = 3;
+  const pageCount = 2;
+  const totalPages = 4;
+
   const leftPageNumber = spread * 2 + 1;
   const rightPageNumber = leftPageNumber + 1;
 
@@ -381,10 +393,8 @@ function Reader({ spread, setSpread, onBack }) {
       case 2:
         return <TimelinePage />;
       case 3:
-        return <PeaceAndFuturePage />;
-      case 4:
         return <ReminderPage />;
-      case 5:
+      case 4:
         return <VoiceMessagePage />;
       default:
         return null;
@@ -396,7 +406,7 @@ function Reader({ spread, setSpread, onBack }) {
       <div className="reader-topline">
         <span>A little book of memories</span>
         <span>
-          Pages {leftPageNumber}–{rightPageNumber} of 6
+          Pages {leftPageNumber}–{rightPageNumber} of {totalPages}
         </span>
       </div>
 
@@ -506,7 +516,11 @@ function App() {
       {view === "cover" && <Cover onClick={openReader} />}
 
       {view === "reader" && (
-        <Reader spread={spread} setSpread={setSpread} onBack={backToCover} />
+        <Reader
+          spread={spread}
+          setSpread={setSpread}
+          onBack={backToCover}
+        />
       )}
     </div>
   );
